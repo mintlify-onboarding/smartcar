@@ -1,0 +1,41 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "smartcar",
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#00819D",
+    "light": "#",
+    "dark": "#00819D"
+  },
+  "topbarCtaButton": {
+    "name": "",
+    "url": ""
+  },
+  "topbarLinks": [
+    {
+      "name": "",
+      "url": ""
+    }
+  ],
+  "anchors": [
+    {
+      "name": "",
+      "icon": "",
+      "url": ""
+    }
+  ],
+  "navigation": [
+    {
+      "group": "",
+      "pages": [""]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "",
+    "linkedin": ""
+  }
+}
