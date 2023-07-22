@@ -8,17 +8,17 @@
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#00819D",
-    "light": "#",
+    "light": "#1898B4",
     "dark": "#00819D"
   },
   "topbarCtaButton": {
-    "name": "",
-    "url": ""
+    "name": "Request a Demo",
+    "url": "https://smartcar.com/"
   },
   "topbarLinks": [
     {
-      "name": "",
-      "url": ""
+      "name": "Sign",
+      "url": "Up"
     }
   ],
   "anchors": [
