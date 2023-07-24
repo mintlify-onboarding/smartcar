@@ -623,7 +623,7 @@ paths:
       summary: Subscribe Webhook
       tags:
         - Webhooks
-      description: "__Description__\n\nSubscribe to a webhook for a vehicle.\n\n__Permission__\n\n`required: webhook:read`\n\n__Response body__\n\n|  Name \t|Type   \t|Boolean   \t|\n|---\t|---\t|---\t|\n|  status|   string|  If the request is successful, Smartcar will return “success” (HTTP 200 status).|"
+      description: "__Description__\n\nSubscribe to a webhook for a vehicle.\n\n__Permission__\n\n`required: webhook:read`\n\n"
       operationId: subscribe
       requestBody:
         content:
@@ -641,7 +641,7 @@ paths:
       summary: Unsubscribe Webhook
       tags:
         - Webhooks
-      description: "__Description__\n\nDelete a webhook for a vehicle.\n\n__Permission__\n\n`required: webhook:read`\n\n__Response body__\n\n|  Name \t|Type   \t|Boolean   \t|\n|---\t|---\t|---\t|\n|  status|   string|  If the request is successful, Smartcar will return “success” (HTTP 200 status).|"
+      description: "__Description__\n\nDelete a webhook for a vehicle.\n\n__Permission__\n\n`required: webhook:read`\n\n"
       operationId: unsubscribe
       responses:
         "200":
