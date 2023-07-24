@@ -32,79 +32,22 @@
   ],
   "navigation": [
     {
-      "group": "Introduction",
-      "pages": ["introduction"]
+      "group": "Integration Guide",
+      "pages": [
+        "introduction",
+        {
+          "group": "Plan Your Integration",
+          "pages": ["plan-your-integration/integrate-smartcar-connect"]
+        }
+      ]
     },
     {
       "group": "API Reference",
       "pages": [
-        {
-          "group": "Cadilac",
-          "pages": [
-            "api-reference/cadillac/retrieve-charging-completion-time-for-a-cadillac",
-            "api-reference/cadillac/retrieve-charging-voltmeter-time-for-a-cadillac"
-          ]
-        },
-        {
-          "group": "Chevrolet",
-          "pages": [
-            "api-reference/chevrolet/retrieve-charging-completion-time-for-a-Chevrolet",
-            "api-reference/chevrolet/retrieve-charging-voltmeter-time-for-a-Chevrolet"
-          ]
-        },
-        {
-          "group": "Compatability",
-          "pages": ["api-reference/compatibility/compatibility"]
-        },
-        {
-          "group": "EVs",
-          "pages": [
-            "api-reference/EVs/EV-battery-capacity",
-            "api-reference/EVs/EV-battery-level",
-            "api-reference/EVs/EV-charging-limit",
-            "api-reference/EVs/EV-charging-status",
-            "api-reference/EVs/set-EV-charging-limit",
-            "api-reference/EVs/Start-or-stop-charging-an-electric-vehicle.-Please-contact-us-to-request-early-access"
-          ]
-        },
-        {
-          "group": "Tesla",
-          "pages": [
-            "api-reference/tesla/retrieve-charging-ammeter-time-for-a-tesla",
-            "api-reference/tesla/retrieve-charging-completion-time-for-a-tesla",
-            "api-reference/tesla/retrieve-charging-voltmeter-time-for-a-tesla",
-            "api-reference/tesla/retrieve-charging-wattmeter-time-for-a-tesla",
-            "api-reference/tesla/retrieve-compass-heading-for-a-tesla",
-            "api-reference/tesla/retrieve-exterior-temperature-for-a-tesla",
-            "api-reference/tesla/retrieve-interior-temperature-for-a-tesla",
-            "api-reference/tesla/retrieve-speed-for-a-tesla",
-            "api-reference/tesla/set-charging-ammeter-time-for-a-tesla"
-          ]
-        },
-        {
-          "group": "User",
-          "pages": ["api-reference/user/user-info"]
-        },
-        {
-          "group": "Vehicles",
-          "pages": [
-            {
-              "group": "Lock",
-              "pages": ["api-reference/vehicles/lock/unlock-vehicle"]
-            },
-            "api-reference/vehicles/all-vehicles",
-            "api-reference/vehicles/application-permissions",
-            "api-reference/vehicles/batch",
-            "api-reference/vehicles/engine-oil-life",
-            "api-reference/vehicles/fuel-tank-US-Only",
-            "api-reference/vehicles/location",
-            "api-reference/vehicles/odometer",
-            "api-reference/vehicles/returns-the-vehicle’s-manufacturer-identifier",
-            "api-reference/vehicles/revoke-access",
-            "api-reference/vehicles/tire-pressure",
-            "api-reference/vehicles/vehicle-Info"
-          ]
-        },
+        "api-reference/all-vehicles",
+        "api-reference/user",
+        "api-reference/disconnet",
+        "api-reference/application-permissions",
         {
           "group": "Webhooks",
           "pages": [

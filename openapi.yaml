@@ -70,39 +70,6 @@ paths:
 
         Returns a paged list of all vehicles connected to the application for
         the current authorized user.
-
-
-        __Query Parameters__
-
-
-        |Parameter| Type|Required|Description|
-
-        |--|--|--|--|
-
-        |`limit`|integer|false|Number of vehicles to return (default: 10).|
-
-        |`offset`|integer|false|A vehicle ID (UUID v4).|Index to start vehicle
-        list at|
-
-
-        __Response Body__
-
-
-        |Name| Type|Desciprtion|
-
-        |--|--|--|
-
-        |`vehicles`|array|An array of vehicle IDs.|
-
-        |`vehicles.[]`|string|A vehicle ID (UUID v4).|
-
-        |`paging`|object|Metadata about the current list of elements.|
-
-        |`paging.count`|integer|The total number of elements for the entire
-        query (not just the given page).|
-
-        |`paging.offset`|integer|The current start index of the returned list of
-        elements.|
       parameters:
         - name: limit
           in: query
@@ -178,39 +145,6 @@ paths:
 
         Returns a list of the permissions that have been granted to your
         application in relation to this vehicle.
-
-
-        __Query Parameters__
-
-
-        |Parameter| Type|Required|Description|
-
-        |--|--|--|--|
-
-        |`limit`|integer|false|Number of permissions to return (default: 25).|
-
-        |`offset`|integer|false|A vehicle ID (UUID v4).|Index to start
-        permission list at|
-
-
-        __Response Body__
-
-
-        |Name| Type|Desciprtion|
-
-        |--|--|--|
-
-        |`permissions`|array|An array of permissions.|
-
-        |`permissions.[]`|string|A permission.|
-
-        |`paging`|object|Metadata about the current list of elements.|
-
-        |`paging.count`|integer|The total number of elements for the entire
-        query (not just the given page).|
-
-        |`paging.offset`|integer|The current start index of the returned list of
-        elements.|
       parameters:
         - name: limit
           in: query
@@ -567,7 +501,7 @@ paths:
       summary: Revoke Access
       tags:
         - Vehicles
-      description: "__Description__\n\nRevoke access for the current requesting application. This is the correct way to disconnect a vehicle.\n\n__Response body__\n\n|  Name \t|Type   \t|Boolean   \t|\n|---\t|---\t|---\t|\n|  status|   string|  If the request is successful, Smartcar will return “success” (HTTP 200 status).|"
+      description: "__Description__\n\nRevoke access for the current requesting application. This is the correct way to disconnect a vehicle.\n\n"
       operationId: disconnect
       responses:
         "200":

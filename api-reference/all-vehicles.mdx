@@ -1,0 +1,20 @@
+---
+openapi: get /vehicles
+---
+
+**Query Parameters**
+
+| Parameter | Type    | Required | Description                                 |
+| --------- | ------- | -------- | ------------------------------------------- |
+| `limit`   | integer | false    | Number of vehicles to return (default: 10). |
+| `offset`  | integer | false    | Index to start vehicle list at              |
+
+**Response Body**
+
+| Name            | Type    | Desciprtion                                                                  |
+| --------------- | ------- | ---------------------------------------------------------------------------- |
+| `vehicles`      | array   | An array of vehicle IDs.                                                     |
+| `vehicles.[]`   | string  | A vehicle ID (UUID v4).                                                      |
+| `paging`        | object  | Metadata about the current list of elements.                                 |
+| `paging.count`  | integer | The total number of elements for the entire query (not just the given page). |
+| `paging.offset` | integer | The current start index of the returned list of elements.                    |

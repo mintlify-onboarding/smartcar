@@ -1,0 +1,177 @@
+---
+title: "Integrate Smartcar Connect"
+---
+
+## 1. Adapt Smartcar Connect to your application architecture
+
+Smartcar Connect is Smartcar’s [OAuth 2.0](https://oauth.net/2/) authorization flow. It is your users’ first and only touchpoint with Smartcar. After a user enters the Smartcar Connect flow and authorizes their vehicle(s), your application is able to make requests to the Smartcar API. Those requests allow your application to retrieve information and send commands to the user’s vehicle(s), such as reading the odometer and unlocking the doors.
+
+Depending on your web or mobile application architecture, you can implement the Smartcar Connect flow in different ways.
+
+### Traditional server-side rendered application
+
+<Frame type="glass">
+  <img src="/images/ServerSideArchitecture.png" />
+</Frame>
+
+1. You can use your preferred language framework for a server-side setup as long as you use [OAuth2 Retrieval protocol](https://oauth.net/2/). In this case:
+   1. Your application redirects the user’s browser to Smartcar Connect.
+   2. The user logs in with the username and password of their vehicle’s connected services account.
+   3. The user grants your application access to their vehicle.
+2. The Smartcar Connect flow is now complete and the user’s browser gets redirected to a specified `redirect_uri`. Your application’s server, which is listening at the `redirect_uri`, retrieves the authorization `code` from query parameters in the `redirect_uri`.
+3. In order to exchange the authorization `code` for an `access_token`, your application makes a request to the Smartcar API. This request must contain the authorization `code` along with your application’s client_id and client_secret.
+4. In response, Smartcar returns an `access_token` and a `refresh_token`. These should be stored in your application’s database.
+5. Using the `access_token`, your application can now make API requests to the user’s vehicle.
+
+### Single-page application
+
+1. Using the [Smartcar JavaScript SDK](https://github.com/smartcar/javascript-sdk), your application launches Smartcar Connect in a pop-up window. The user logs in with the username and password of their vehicle’s connected services account and grants your application access to their vehicle. If you are interested in building a web application that uses Node for API access, check out our [starter applications on Github](https://github.com/smartcar/starter-app-react-node).
+2. The user’s browser gets redirected to a special Smartcar-hosted `redirect_uri`. For more details on how to configure a Smartcar-hosted `redirect_uri`, see our [API reference](/api-reference).
+3. Once the user has completed the Smartcar Connect flow, the `onComplete` callback in the JavaScript SDK is invoked with the authorization `code`.
+4. Your application front end sends the authorization `code` to its back-end service.
+5. In order to exchange the authorization `code` for an `access_token`, your application makes a request to the Smartcar API. This request must contain the authorization code along with your application’s client_id and client_secret.
+6. In response, Smartcar returns an `access_token` and a refresh_token. These should be stored in your application’s database.
+7. Using the `access_token`, your application can now make API requests to the user’s vehicle.
+
+### Mobile application
+
+<Frame type="glass">
+  <img src="/images/MobileArchitecture.png" />
+</Frame>
+
+1. Using the [Smartcar JavaScript SDK](https://github.com/smartcar/javascript-sdk), your application launches Smartcar Connect in a pop-up window. The user logs in with the username and password of their vehicle’s connected services account and grants your application access to their vehicle. If you are interested in building a web application that uses Node for API access, check out our [starter applications on Github](https://github.com/smartcar/starter-app-react-node).
+2. The user’s browser gets redirected to a special Smartcar-hosted `redirect_uri`. For more details on how to configure a Smartcar-hosted `redirect_uri`, see our [API reference](/api-reference).
+3. Once the user has completed the Smartcar Connect flow, the `onComplete` callback in the JavaScript SDK is invoked with the authorization `code`.
+4. Your application front end sends the authorization `code` to its back-end service.
+5. In order to exchange the authorization `code` for an `access_token`, your application makes a request to the Smartcar API. This request must contain the authorization code along with your application’s client_id and client_secret.
+6. In response, Smartcar returns an `access_token` and a refresh_token. These should be stored in your application’s database.
+7. Using the `access_token`, your application can now make API requests to the user’s vehicle.
+
+## 2. Adapt Smartcar Connect to your use case
+
+### Fit Smartcar Connect into the user journey
+
+To increase conversions and maximize your users’ satisfaction, it is crucial to launch Smartcar Connect at the right moment in your product’s user journey.
+
+We recommend prompting the user to connect their car through Smartcar Connect while they are onboarding their vehicle to your application for the first time.
+
+### Standard: Let the user connect one or more vehicles
+
+In the standard Smartcar Connect flow, the user selects their car brand and logs in with the username and password of their vehicle’s connected services account. On the next screen, the user can see all vehicles associated with their account. The user can select one or multiple of these vehicles and grant your application access to them.
+
+<Frame type="glass">
+  <img src="/images/StandardFlow.png" />
+</Frame>
+
+We recommend using the standard Smartcar Connect flow whenever you don’t yet know the make or VIN of your user’s vehicle(s). If you know the make or VIN of your user’s vehicle(s), we recommend personalizing the Smartcar Connect flow in the following ways:
+
+### Optional: Skip the car brand selection screen
+
+If you know the make of your user’s vehicle(s) prior to launching Smartcar Connect, we recommend using [Brand Select](https://smartcar.com/docs/api#brand-select). Brand Select causes the user to automatically skip the car brand selection screen. Instead, the user lands directly on their vehicle brand’s login screen. This speeds up the onboarding experience and increases conversions.
+
+<Frame type="glass">
+  <img src="/images/ConnectDirect.png" />
+</Frame>
+
+### Optional: Check a vehicle’s eligibility before launching Smartcar Connect
+
+If you know the VIN of your user’s vehicle prior to launching Smartcar Connect, we recommend using the [Compatibility API](/api-reference). The Compatibility API lets you verify a vehicle’s eligibility before sending a user through Smartcar Connect. That way, your application will show Smartcar Connect to users with compatible vehicles only.
+
+<Info>
+  The Compatibility API is only available for vehicles sold in the United
+  States.
+</Info>
+
+### Optional: Make sure the user connects the right vehicle
+
+If you know the VIN of your user’s vehicle prior to launching Smartcar Connect, we recommend using [Single Select](https://smartcar.com/docs/api#single-select). Single Select causes the user to skip the car brand selection screen. It also limits them to connecting only the vehicle with that specific VIN, even if the user has registered multiple vehicles under the same connected services account. This simplifies the user experience and guarantees that the user connects the right vehicle to your application.
+
+<Frame type="glass">
+  <img src="/images/ConnectMatch.png" />
+</Frame>
+
+## 3. Set optional and/or required permissions
+
+When [redirecting a user to Smartcar Connect](https://smartcar.com/docs/api#smartcar-connect), you need to include a `scope` parameter that indicates which permissions your application requests access to. Every vehicle endpoint has a permission name associated with it. For example, the permission name for the [/fuel endpoint](/api-reference/EVs/EV-charging-limit) is `read_fuel`. Please see our [API reference](/api-reference) for a full list of all permission names.
+
+### Optional permissions
+
+Not all vehicles are capable of all permissions. For example, Tesla vehicles aren’t capable of the `read_fuel` permission, because they don’t have fuel tanks. In order to handle this smoothly, all permissions that your application requests access to in Smartcar Connect are optional by default.
+
+For example, let’s assume that your app requests access to the `read_location` and the `read_fuel` permissions. A user connects their Tesla vehicle through Smartcar Connect. The user is able to successfully authorize their vehicle, because both, the `read_location` and the `read_fuel` permission are optional. In the background, your application is granted permission to the `read_location` endpoint only, because the vehicle is incapable of the read_fuel permission.
+
+In order to verify which permissions your application was granted access to, make a request to the [/permissions endpoint](/api-reference/vehicles/revoke-access):
+
+<CodeGroup>
+
+```java Node
+const permissions = await vehicle.permissions();
+console.log(permissions);
+```
+
+```python Python
+response = vehicle.permissions()
+print(response)
+```
+
+```java Java
+ApplicationPermissions response = vehicle.permissions();
+System.out.println(response);
+```
+
+```ruby Ruby
+response = vehicle.permissions
+puts response.permissions
+```
+
+</CodeGroup>
+
+### Required permissions
+
+If certain permissions are essential to your application’s use case, you can make them required by adding the `required`: prefix to each pertaining permission within the `scope` parameter (e.g. `required:read_fuel`). The user is then able to authorize a vehicle only if the vehicle is capable of all required permissions.
+
+For example, let’s assume that you mark both `read_location` and `read_fuel` as required in the scope parameter. A user tries to connect their Tesla vehicle through Smartcar Connect. As Tesla vehicles are incapable of the read_fuel permission, the user isn’t able to successfully authorize their vehicle. Instead, Smartcar sends the vehicle_incompatible error back to your application.
+
+<CodeGroup>
+
+```java Node
+const client = new smartcar.AuthClient({
+  clientId: CLIENT_ID,
+  clientSecret: CLIENT_SECRET,
+  redirectUri: REDIRECT_URI,
+});
+const scope = ["required:read_location", "required:read_fuel"];
+const authUrl = client.getAuthUrl(scope);
+```
+
+```python Python
+client = smartcar.AuthClient(
+  client_id=CLIENT_ID,
+  client_secret=CLIENT_SECRET,
+  redirect_uri=REDIRECT_URI,
+)
+scope = ['required:read_location', 'required:read_fuel']
+auth_url = client.get_auth_url(scope=scope)
+```
+
+```java Java
+AuthClient authClient = new AuthClient.Builder()
+    .clientId(CLIENT_ID)
+    .clientSecret(CLIENT_SECRET)
+    .redirectUri(REDIRECT_URI)
+    .build();
+String[] scope = new String[]{"required:read_location", "required:read_fuel"};
+String authUrl = authClient.authUrlBuilder(scope).build();
+```
+
+```ruby Ruby
+client = Smartcar::AuthClient.new({
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET,
+  redirect_uri: REDIRECT_URI,
+})
+scope = %w(required:read_location required:read_fuel)
+auth_url = client.get_auth_url(scope)
+```
+
+</CodeGroup>
