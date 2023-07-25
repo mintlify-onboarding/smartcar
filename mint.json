@@ -20,8 +20,8 @@
   },
   "topbarLinks": [
     {
-      "name": "Sign",
-      "url": "Up"
+      "name": "Login",
+      "url": "https://dashboard.smartcar.com/login/"
     }
   ],
   "tabs": [
